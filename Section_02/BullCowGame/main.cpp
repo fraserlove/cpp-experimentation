@@ -37,7 +37,7 @@ int main()
 
 void PrintIntro()
 {
-	std::cout << std::endl << std::endl << "Welcome to Bulls and Cows" << std::endl;
+	std::cout << "Welcome to Bulls and Cows" << std::endl;
 	std::cout << "A Game Developed in C++ by Fraser Love" << std::endl << std::endl;
 	std::cout << "Can you guess the " << BCGame.GetHiddenWordLength() << " letter isogram I am thinking of?" << std::endl;
 	return;

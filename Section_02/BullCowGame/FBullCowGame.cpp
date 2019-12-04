@@ -2,7 +2,8 @@
 
 #include "FBullCowGame.h"
 #include <map>
-#include <random>
+#include <cstdlib>
+#include <ctime>
 
 // To adhere syntax to the Unreal coding standards
 #define TMap std::map
@@ -12,7 +13,13 @@ FBullCowGame::FBullCowGame() { Reset(); } // Constructor
 int32 FBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
 int32 FBullCowGame::GetHiddenWordLength() const { return MyHiddenWord.length(); }
 bool FBullCowGame::IsGameWon() const { return bGameIsWon; }
-FString FBullCowGame::PickHiddenWord(FString WordList[12]) const { return WordList[rand() % 12]; }
+
+FString FBullCowGame::PickHiddenWord() const
+{ 
+	srand((int)time(0));
+	int random = (rand() % 10);
+	return MyHiddenWords[random]; 
+}
 
 int32 FBullCowGame::GetMaxTries() const
 {
@@ -26,9 +33,7 @@ int32 FBullCowGame::GetMaxTries() const
 
 void FBullCowGame::Reset()
 {
-	const FString HIDDEN_WORD = PickHiddenWord(MyHiddenWords);
-
-	MyHiddenWord = HIDDEN_WORD;
+	MyHiddenWord = PickHiddenWord();
 	MyCurrentTry = 1;
 	bGameIsWon = false;
 	return;

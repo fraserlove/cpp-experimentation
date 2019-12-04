@@ -12,7 +12,7 @@ struct FBullCowCount
 	int32 Cows = 0;
 };
 
-enum EGuessStatus
+enum class EGuessStatus
 {
 	Invalid_Status,
 	OK,
@@ -30,6 +30,7 @@ public:
 	int32 GetCurrentTry() const;
 	int32 GetHiddenWordLength() const;
 	EGuessStatus CheckGuessValidity(FString) const;
+	FString PickHiddenWord() const;
 	bool IsGameWon() const;
 
 	void Reset();
@@ -37,12 +38,11 @@ public:
 
 private:
 	int32 MyCurrentTry;
-	FString MyHiddenWords[12] = {"planet", "bricks", "age", "view", "outside", "lakes", "sword", "aftershock", "flashpoint", "ultrasonic", "dispute", "demographics"};
+	FString MyHiddenWords[10] = {"planet", "age", "view", "outside", "sword", "aftershock", "flashpoint", "ultrasonic", "dispute", "demographics"};
 	FString MyHiddenWord;
 	bool bGameIsWon;
-	int32 InitValues[6][2] = {{3,5}, {4,7}, {5,10}, {6,16}, {7,20}, {8,26}};
+	int32 InitValues[10][2] = { {3,5}, {4,7}, {5,10}, {6,16}, {7,20}, {8,26}, {9,32}, {10,40}, {11,50}, {12,60} };
 
 	bool IsIsogram(FString) const;
 	bool IsLowercase(FString) const;
-	FString PickHiddenWord(FString[]) const;
 };
