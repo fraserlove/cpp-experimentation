@@ -1,0 +1,13 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = true
+[remote "cpp-visualstudio-projects"]
+	url = https://github.com/fraserlove/cpp-visualstudio-projects.git
+	fetch = +refs/heads/*:refs/remotes/cpp-visualstudio-projects/*
+[branch "master"]
+	remote = cpp-visualstudio-projects
+	merge = refs/heads/master
