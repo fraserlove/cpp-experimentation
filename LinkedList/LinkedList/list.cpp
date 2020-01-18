@@ -3,14 +3,25 @@
 #include "list.h"
 
 List::List() {
-	//std::cout << "Info: Creating List" << std::endl;
-	head = NULL;
-	curr = NULL;
-	temp = NULL;
+	initPtrs();
+}
+
+List::List(int initArray[], int size) {
+	initPtrs();
+	for (int i = 0; i < size; i++) {
+		AddNode(initArray[i]);
+	}
 }
 
 List::~List () {
 	//std::cout << "Info: Deleting List" << std::endl;
+}
+
+void List::initPtrs() {
+	//std::cout << "Info: Creating List" << std::endl;
+	head = NULL;
+	curr = NULL;
+	temp = NULL;
 }
 
 void List::AddNode(int addData) {
@@ -31,7 +42,41 @@ void List::AddNode(int addData) {
 	//std::cout << "Info: Added instance of " << addData << std::endl;
 }
 
-void List::DeleteNode(int delData) {
+void List::AddNode(int addData, int idx) {
+	int length = FindLength();
+
+	if (idx == length) {
+		AddNode(addData);
+	}
+	else if (idx > length or idx < 0) {
+		std::cout << "ADDITION ERROR: Index " << idx << " is outwith list bounds" << std::endl;
+	}
+	else {
+		node* newNode = new node;
+		newNode->data = addData;
+
+		if (idx == 0) {
+			newNode->next = head;
+			head = newNode;
+		}
+		else {
+			temp = head;
+			curr = head;
+
+			int cIdx = 0;
+			while (cIdx < length and cIdx != idx) {
+				temp = curr;
+				curr = curr->next;
+				cIdx++;
+			}
+			temp->next = newNode;
+			newNode->next = curr;
+		}
+		//std::cout << "Info: Added instance of " << addData << std::endl;
+	}
+}
+
+void List::DeleteNodeByInstance(int delData) {
 	node* delPtr = NULL;
 	temp = head;
 	curr = head;
@@ -41,62 +86,67 @@ void List::DeleteNode(int delData) {
 		curr = curr->next;
 	}
 	if (curr == NULL) {
-		delete delPtr;
-		std::cout << "Error: No instance of " << delData << " found for deletion" << std::endl;
+		std::cout << "DELETION ERROR: No instance of " << delData << " found" << std::endl;
 	}
 	else {
 		delPtr = curr;
 		curr = curr->next;
 		temp->next = curr;
+
 		if (delPtr == head) {
 			head = head->next;
 			temp = NULL;
 		}
-		delete delPtr;
 		//std::cout << "Info: Removed instance of " << delData << std::endl;
 	}
+	delete delPtr;
 }
 
-void List::InsertNode(int instData, int idx) {
+void List::DeleteNodeByIndex(int idx) {
 	int length = FindLength();
-	idx--;
 
-	if (idx == length - 1) {
-		AddNode(instData);
-	}
-	else if (idx == -1) {
-		node* newNode = new node;
-		newNode->next = head;
-		newNode->data = instData;
-		head = newNode;
-		//std::cout << "Info: Added instance of " << instData << std::endl;
-	}
-	else if (idx >= length) {
-		std::cout << "Error: Index " << idx << " specified is greater than list bounds" << std::endl;
+	node* delPtr = NULL;
+	temp = head;
+	curr = head;
+
+	if (idx >= length or idx < 0) {
+		std::cout << "DELETION ERROR: Index " << idx << " is outwith list bounds" << std::endl;
 	}
 	else {
-		node* newNode = new node;
-		newNode->next = NULL;
-		newNode->data = instData;
-
-		temp = head;
-		curr = head;
-
 		int cIdx = 0;
-		bool found = false;
-
-		while (cIdx < length - 1 and !found) {
-			if (cIdx == idx) {
-				found = true;
-			}
+		while (cIdx < length and cIdx != idx) {
 			temp = curr;
 			curr = curr->next;
 			cIdx++;
 		}
-		temp->next = newNode;
-		newNode->next = curr;
-		//std::cout << "Info: Added instance of " << addData << std::endl;
+		delPtr = curr;
+		curr = curr->next;
+		temp->next = curr;
+
+		if (delPtr == head) {
+			head = head->next;
+			temp = NULL;
+		}
 	}
+	//std::cout << "INFO: Removed node at index " << idx << std::endl;
+	delete delPtr;
+
+}
+
+void List::PrintList() {
+	curr = head;
+
+	std::cout << "List : ";
+	while (curr != NULL) {
+		if (curr == head) {
+			std::cout << curr->data;
+		}
+		else {
+			std::cout << ", " << curr->data;
+		}
+		curr = curr->next;
+	}
+	std::cout << std::endl;
 }
 
 int List::FindLength() {
@@ -108,20 +158,4 @@ int List::FindLength() {
 		curr = curr->next;
 	}
 	return idx;
-}
-
-void List::PrintList() {
-	curr = head;
-
-	std::cout << "List Elements: ";
-	while (curr != NULL) {
-		if (curr == head) {
-			std::cout << curr->data;
-		}
-		else {
-			std::cout << ", " << curr->data;
-		}
-		curr = curr->next;
-	}
-	std::cout << std::endl;
 }

@@ -2,7 +2,6 @@
 
 class List {
 private:
-
 	struct node {
 		int data;
 		node* next;
@@ -12,14 +11,18 @@ private:
 	node* curr;
 	node* temp;
 
-public:
+	void initPtrs();
 
+public:
 	List();
+	List(int initArray[], int size);
 	~List();
+
 	void AddNode(int addData);
-	void DeleteNode(int delData);
-	void InsertNode(int instData, int idx);
+	void AddNode(int addData, int idx);
+	void DeleteNodeByInstance(int delData);
+	void DeleteNodeByIndex(int idx);
 	int FindLength();
 	void PrintList();
-
+	//int AccessIndex() return value;
 }; 
