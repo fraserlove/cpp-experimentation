@@ -15,13 +15,11 @@ private:
 public:
 
 	List();
+	~List();
 	void AddNode(int addData);
 	void DeleteNode(int delData);
+	void InsertNode(int instData, int idx);
+	int FindLength();
 	void PrintList();
 
-	// TODO - Create InsertNode (int instData, node* instIndex) 
-	// Add index attribute
-	// Overload del function to delete by passing in an index
-	// Create sorting and search (return index) functions
-	// Create destructor method removing all nodes
 }; 
