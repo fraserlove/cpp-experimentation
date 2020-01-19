@@ -2,19 +2,24 @@
 
 #include "list.h"
 
+void testCode() {
+
+	List list;
+	int n = 10;
+	for (int i = 0; i < n; i++) {
+		list.AddNode(i);
+	}
+	list.PrintList();
+
+	int* array = list.ConvertToArray();
+	for (int i = 0; i < n; i++) {
+		std::cout << array[i] << " ";
+	}
+	std::cout << std::endl;
+	delete[] array;
+}
+
 int main() {
 
-	// Test Code
-	int array[] = { 0, 1, 2, 3, 4, 5 };
-
-	List list(array, 6);
-	list.PrintList();
-	list.AddNode(10,8);
-	list.PrintList();
-	list.AddNode(10,6);
-	list.PrintList();
-	list.AddNode(10,5);
-	list.PrintList();
-	list.AddNode(10,0);
-	list.PrintList();
+	testCode();
 }

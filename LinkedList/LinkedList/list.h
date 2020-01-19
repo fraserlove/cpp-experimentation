@@ -20,9 +20,15 @@ public:
 
 	void AddNode(int addData);
 	void AddNode(int addData, int idx);
+
 	void DeleteNodeByInstance(int delData);
 	void DeleteNodeByIndex(int idx);
-	int FindLength();
+
+	void UpdateIndex(int newData, int idx);
+
 	void PrintList();
-	//int AccessIndex() return value;
+
+	int FindLength();
+	int AccessIndex(int idx);
+	int* ConvertToArray();
 }; 

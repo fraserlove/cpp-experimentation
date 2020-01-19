@@ -14,11 +14,11 @@ List::List(int initArray[], int size) {
 }
 
 List::~List () {
-	//std::cout << "Info: Deleting List" << std::endl;
+	//std::cout << "INFO: Deleting List" << std::endl;
 }
 
 void List::initPtrs() {
-	//std::cout << "Info: Creating List" << std::endl;
+	//std::cout << "INFO: Creating List" << std::endl;
 	head = NULL;
 	curr = NULL;
 	temp = NULL;
@@ -39,7 +39,7 @@ void List::AddNode(int addData) {
 	else {
 		head = newNode;
 	}
-	//std::cout << "Info: Added instance of " << addData << std::endl;
+	//std::cout << "INFO: Added instance of " << addData << std::endl;
 }
 
 void List::AddNode(int addData, int idx) {
@@ -64,7 +64,7 @@ void List::AddNode(int addData, int idx) {
 			curr = head;
 
 			int cIdx = 0;
-			while (cIdx < length and cIdx != idx) {
+			while (cIdx != idx) {
 				temp = curr;
 				curr = curr->next;
 				cIdx++;
@@ -72,7 +72,7 @@ void List::AddNode(int addData, int idx) {
 			temp->next = newNode;
 			newNode->next = curr;
 		}
-		//std::cout << "Info: Added instance of " << addData << std::endl;
+		//std::cout << "INFO: Added instance of " << addData << std::endl;
 	}
 }
 
@@ -97,7 +97,7 @@ void List::DeleteNodeByInstance(int delData) {
 			head = head->next;
 			temp = NULL;
 		}
-		//std::cout << "Info: Removed instance of " << delData << std::endl;
+		//std::cout << "INFO: Removed instance of " << delData << std::endl;
 	}
 	delete delPtr;
 }
@@ -114,7 +114,7 @@ void List::DeleteNodeByIndex(int idx) {
 	}
 	else {
 		int cIdx = 0;
-		while (cIdx < length and cIdx != idx) {
+		while (cIdx != idx) {
 			temp = curr;
 			curr = curr->next;
 			cIdx++;
@@ -133,10 +133,27 @@ void List::DeleteNodeByIndex(int idx) {
 
 }
 
+void List::UpdateIndex(int newData, int idx) {
+	int length = FindLength();
+	curr = head;
+	int cIdx = 0;
+
+	if (idx >= length or idx < 0) {
+		std::cout << "UPDATE ERROR: Index " << idx << " is outwith list bounds" << std::endl;
+	}
+	else {
+		while (cIdx != idx) {
+			curr = curr->next;
+			cIdx++;
+		}
+		curr->data = newData;
+	}
+}
+
 void List::PrintList() {
 	curr = head;
 
-	std::cout << "List : ";
+	std::cout << "List: ";
 	while (curr != NULL) {
 		if (curr == head) {
 			std::cout << curr->data;
@@ -154,8 +171,40 @@ int List::FindLength() {
 	int idx = 0;
 
 	while (curr != NULL) {
-		idx++;
 		curr = curr->next;
+		idx++;
 	}
 	return idx;
+}
+
+int List::AccessIndex(int idx) {
+	int length = FindLength();
+	curr = head;
+	int cIdx = 0;
+
+	if (idx >= length or idx < 0) {
+		std::cout << "ACCESS ERROR: Index " << idx << " is outwith list bounds" << std::endl;
+		return -1;
+	}
+	else {
+		while (cIdx != idx) {
+			curr = curr->next;
+			cIdx++;
+		}
+		return curr->data;
+	}
+}
+
+int* List::ConvertToArray() {
+	int length = FindLength();
+	int* array = new int[length];
+	curr = head;
+	int cIdx = 0;
+
+	while (curr != NULL) {
+		array[cIdx] = curr->data;
+		curr = curr->next;
+		cIdx++;
+	}
+	return array;
 }
