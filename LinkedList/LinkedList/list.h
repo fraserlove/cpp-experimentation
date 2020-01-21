@@ -26,7 +26,9 @@ public:
 
 	void UpdateIndex(int newData, int idx);
 
+	void Reverse();
 	void PrintList();
+	void PrintStructure();
 
 	int FindLength();
 	int AccessIndex(int idx);

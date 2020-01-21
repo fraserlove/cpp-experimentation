@@ -150,6 +150,20 @@ void List::UpdateIndex(int newData, int idx) {
 	}
 }
 
+void List::Reverse() {
+	curr = head;
+	temp = curr->next;
+	curr->next = NULL;
+
+	while (temp != NULL) {
+		node* prev = temp->next;
+		temp->next = curr;
+		curr = temp;
+		temp = prev;
+	}
+	head = curr;
+}
+
 void List::PrintList() {
 	curr = head;
 
@@ -163,6 +177,24 @@ void List::PrintList() {
 		}
 		curr = curr->next;
 	}
+	std::cout << std::endl;
+}
+
+void List::PrintStructure() {
+	curr = head;
+	temp = curr;
+
+	while (curr != NULL) {
+		if (curr == head) {
+			std::cout << "List Structure: |" << curr->data << ": " << &curr->data << "|";
+		}
+		else {
+			std::cout << "--" << temp->next << "-->  " <<"|" << curr->data << ": " << &curr->data << "|";
+		}
+		temp = curr;
+		curr = curr->next;
+	}
+	std::cout << "--" << temp->next << "-->  ";
 	std::cout << std::endl;
 }
 
