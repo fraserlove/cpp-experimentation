@@ -48,7 +48,7 @@ void List::AddNode(int addData, int idx) {
 	if (idx == length) {
 		AddNode(addData);
 	}
-	else if (idx > length or idx < 0) {
+	else if (idx > length-1 or idx < 0) {
 		std::cout << "ADDITION ERROR: Index " << idx << " is outwith list bounds" << std::endl;
 	}
 	else {

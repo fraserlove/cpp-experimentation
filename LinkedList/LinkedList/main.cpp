@@ -2,10 +2,10 @@
 
 #include "list.h"
 
-void convToArray(List list, int n) {
+void convToArray(List list) {
 
 	int* array = list.ConvertToArray();
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; i < list.FindLength(); i++) {
 		std::cout << array[i] << " ";
 	}
 	std::cout << std::endl;
@@ -26,8 +26,10 @@ void testCode() {
 	list = addNodes(list, n);
 	list.PrintStructure();
 	list.Reverse();
+	list.AddNode(-1);
+	list.AddNode(6, 0);
 	list.PrintStructure();
-	convToArray(list, n);
+	convToArray(list);
 }
 
 int main() {
