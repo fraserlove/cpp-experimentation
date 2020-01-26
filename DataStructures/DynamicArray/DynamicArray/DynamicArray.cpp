@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "array.h"
+#include "DynamicArray.h"
 
 template <class T>
 DynamicArray<T>::DynamicArray() {

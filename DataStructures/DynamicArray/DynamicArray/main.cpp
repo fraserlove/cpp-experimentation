@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "array.h"
+#include "DynamicArray.h"
 
 int main() {
 	int vals[6] = { 0,1,2,3,4,5 };
