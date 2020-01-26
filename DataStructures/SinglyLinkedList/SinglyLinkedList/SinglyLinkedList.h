@@ -1,5 +1,5 @@
 /*
-Linked List Implementation
+Singly Linked List Implementation
 Developed by Fraser Love
 Created 17/01/20
 Latest Release 26/01/20
@@ -10,23 +10,23 @@ Uses C++ Templates and can be used with integers, floats and characters
 #pragma once
 
 template <class T>
-class List {
+class SinglyLinkedList {
 private:
-	struct node {
+	struct Node {
 		T data;
-		node* next;
+		Node* next;
 	};
 
-	node* head;
-	node* curr;
-	node* temp;
+	Node* head;
+	Node* curr;
+	Node* temp;
 
-	int size;
+	int len;
 
 public:
-	List();
-	List(T data[], int size);
-	~List();
+	SinglyLinkedList();
+	SinglyLinkedList(T data[], int size);
+	~SinglyLinkedList();
 
 	void AddNode(T data); // Adds a new node to the end of the linked list with the data specified
 	void AddNode(int idx, T data); // Adds a new node to the linked list at a specific location with the data specified

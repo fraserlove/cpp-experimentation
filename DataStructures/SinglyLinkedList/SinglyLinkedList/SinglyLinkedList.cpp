@@ -1,24 +1,24 @@
 #include <iostream>
 
-#include "list.h"
+#include "SinglyLinkedList.h"
 
 template <class T>
-List<T>::List() {
+SinglyLinkedList<T>::SinglyLinkedList() {
 	head = NULL;
-	size = 0;
+	len = 0;
 }
 
 template <class T>
-List<T>::List(T data[], int size) {
+SinglyLinkedList<T>::SinglyLinkedList(T data[], int size) {
 	head = NULL;
-	size = 0;
+	len = 0;
 	for (int i = 0; i < size; i++) {
 		AddNode(data[i]);
 	}
 }
 
 template <class T>
-List<T>::~List () {
+SinglyLinkedList<T>::~SinglyLinkedList () {
 	curr = head;
 	temp = curr;
 	while (curr != NULL) {
@@ -30,24 +30,25 @@ List<T>::~List () {
 }
 
 template <class T>
-void List<T>::AddNode(T data) {
-	node* newNode = new node;
-	newNode->next = NULL;
-	newNode->data = data;
+void SinglyLinkedList<T>::AddNode(T data) {
+	Node* new_node = new Node;
+	new_node->next = NULL;
+	new_node->data = data;
 	if (head != NULL) {
 		curr = head;
 		while (curr->next != NULL) {
 			curr = curr->next;
 		}
-		curr->next = newNode;
+		curr->next = new_node;
 	}
 	else {
-		head = newNode;
+		head = new_node;
 	}
+	len++;
 }
 
 template <class T>
-void List<T>::AddNode(int idx, T data) {
+void SinglyLinkedList<T>::AddNode(int idx, T data) {
 	int length = Length();
 	if (idx == length) {
 		AddNode(data);
@@ -56,11 +57,11 @@ void List<T>::AddNode(int idx, T data) {
 		std::cout << "ERROR: Index " << idx << " outwith list bounds" << std::endl;
 	}
 	else {
-		node* newNode = new node;
-		newNode->data = data;
+		Node* new_node = new Node;
+		new_node->data = data;
 		if (idx == 0) {
-			newNode->next = head;
-			head = newNode;
+			new_node->next = head;
+			head = new_node;
 		}
 		else {
 			temp = head;
@@ -72,15 +73,16 @@ void List<T>::AddNode(int idx, T data) {
 				curr = curr->next;
 				cIdx++;
 			}
-			temp->next = newNode;
-			newNode->next = curr;
+			temp->next = new_node;
+			new_node->next = curr;
 		}
+		len++;
 	}
 }
 
 template <class T>
-void List<T>::RemoveValue(T data) {
-	node* delPtr = NULL;
+void SinglyLinkedList<T>::RemoveValue(T data) {
+	Node* delPtr = NULL;
 	temp = head;
 	curr = head;
 	while (curr != NULL && curr->data != data) {
@@ -99,14 +101,15 @@ void List<T>::RemoveValue(T data) {
 			head = head->next;
 			temp = NULL;
 		}
+		len--;
 	}
 	delete delPtr;
 }
 
 template <class T>
-void List<T>::DeleteNode(int idx) {
+void SinglyLinkedList<T>::DeleteNode(int idx) {
 	int length = Length();
-	node* delPtr = NULL;
+	Node* delPtr = NULL;
 	temp = head;
 	curr = head;
 	if (idx >= length || idx < 0) {
@@ -126,13 +129,14 @@ void List<T>::DeleteNode(int idx) {
 			head = head->next;
 			temp = NULL;
 		}
+		len--;
 	}
 	delete delPtr;
 
 }
 
 template <class T>
-void List<T>::Update(int idx, T data) {
+void SinglyLinkedList<T>::Update(int idx, T data) {
 	int length = Length();
 	curr = head;
 	int cIdx = 0;
@@ -149,13 +153,13 @@ void List<T>::Update(int idx, T data) {
 }
 
 template <class T>
-void List<T>::Reverse() {
+void SinglyLinkedList<T>::Reverse() {
 	curr = head;
 	temp = curr->next;
 	curr->next = NULL;
 
 	while (temp != NULL) {
-		node* prev = temp->next;
+		Node* prev = temp->next;
 		temp->next = curr;
 		curr = temp;
 		temp = prev;
@@ -164,7 +168,7 @@ void List<T>::Reverse() {
 }
 
 template <class T>
-void List<T>::Show() {
+void SinglyLinkedList<T>::Show() {
 	curr = head;
 	std::cout << "List: ";
 	while (curr != NULL) {
@@ -180,7 +184,7 @@ void List<T>::Show() {
 }
 
 template <class T>
-void List<T>::ShowDebug() {
+void SinglyLinkedList<T>::ShowDebug() {
 	curr = head;
 	temp = curr;
 	while (curr != NULL) {
@@ -198,18 +202,12 @@ void List<T>::ShowDebug() {
 }
 
 template <class T>
-int List<T>::Length() {
-	curr = head;
-	int idx = 0;
-	while (curr != NULL) {
-		curr = curr->next;
-		idx++;
-	}
-	return idx;
+int SinglyLinkedList<T>::Length() {
+	return len;
 }
 
 template <class T>
-int List<T>::Access(int idx) {
+int SinglyLinkedList<T>::Access(int idx) {
 	int length = Length();
 	curr = head;
 	int cIdx = 0;
@@ -227,7 +225,7 @@ int List<T>::Access(int idx) {
 }
 
 template <class T>
-int* List<T>::ToArray() {
+int* SinglyLinkedList<T>::ToArray() {
 	int length = Length();
 	int* array = new int[length];
 	curr = head;
@@ -241,6 +239,6 @@ int* List<T>::ToArray() {
 }
 
 // Template Definitions
-template class List<int>;
-template class List<float>;
-template class List<char>;
+template class SinglyLinkedList<int>;
+template class SinglyLinkedList<float>;
+template class SinglyLinkedList<char>;
