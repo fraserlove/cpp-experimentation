@@ -33,6 +33,7 @@ public:
 	void RemoveValue(T data); // Deletes the first instance of a node with a specified value in the linked list
 	void DeleteNode(int idx); // Deletes a node by its index in the linked list
 	void Update(int idx, T data); // Updates the data in a specific node with the new data supplied
+	void Clear(); // Overwrites all data and pointers in the linked list and deallocates nodes from the heap
 	void Reverse(); // Reverses the linked list by updating pointers to the previous node
 	void Show(); // Displays the entire linked list
 	void ShowDebug(); // Displays the entire linked list, showing its structure and pointers for debugging

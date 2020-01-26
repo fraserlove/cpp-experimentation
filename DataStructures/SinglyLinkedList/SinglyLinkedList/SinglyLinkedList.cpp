@@ -82,7 +82,7 @@ void SinglyLinkedList<T>::AddNode(int idx, T data) {
 
 template <class T>
 void SinglyLinkedList<T>::RemoveValue(T data) {
-	Node* delPtr = NULL;
+	Node* del_ptr = NULL;
 	temp = head;
 	curr = head;
 	while (curr != NULL && curr->data != data) {
@@ -93,23 +93,23 @@ void SinglyLinkedList<T>::RemoveValue(T data) {
 		std::cout << "ERROR: No instance of " << data << " found" << std::endl;
 	}
 	else {
-		delPtr = curr;
+		del_ptr = curr;
 		curr = curr->next;
 		temp->next = curr;
 
-		if (delPtr == head) {
+		if (del_ptr == head) {
 			head = head->next;
 			temp = NULL;
 		}
 		len--;
 	}
-	delete delPtr;
+	delete del_ptr;
 }
 
 template <class T>
 void SinglyLinkedList<T>::DeleteNode(int idx) {
 	int length = Length();
-	Node* delPtr = NULL;
+	Node* del_ptr = NULL;
 	temp = head;
 	curr = head;
 	if (idx >= length || idx < 0) {
@@ -122,16 +122,16 @@ void SinglyLinkedList<T>::DeleteNode(int idx) {
 			curr = curr->next;
 			cIdx++;
 		}
-		delPtr = curr;
+		del_ptr = curr;
 		curr = curr->next;
 		temp->next = curr;
-		if (delPtr == head) {
+		if (del_ptr == head) {
 			head = head->next;
 			temp = NULL;
 		}
 		len--;
 	}
-	delete delPtr;
+	delete del_ptr;
 
 }
 
@@ -153,6 +153,22 @@ void SinglyLinkedList<T>::Update(int idx, T data) {
 }
 
 template <class T>
+void SinglyLinkedList<T>::Clear() {
+	curr = head;
+	while (curr != NULL) {
+		Node* del_ptr = NULL;
+		del_ptr = curr;
+		curr = curr->next;
+		del_ptr->next == NULL;
+		del_ptr->data == NULL;
+		delete del_ptr;
+	}
+	head = NULL;
+	temp = NULL;
+	len = 0;
+}
+
+template <class T>
 void SinglyLinkedList<T>::Reverse() {
 	curr = head;
 	temp = curr->next;
@@ -170,10 +186,9 @@ void SinglyLinkedList<T>::Reverse() {
 template <class T>
 void SinglyLinkedList<T>::Show() {
 	curr = head;
-	std::cout << "List: ";
 	while (curr != NULL) {
 		if (curr == head) {
-			std::cout << curr->data;
+			std::cout << "List: " << curr->data;
 		}
 		else {
 			std::cout << ", " << curr->data;
@@ -186,18 +201,15 @@ void SinglyLinkedList<T>::Show() {
 template <class T>
 void SinglyLinkedList<T>::ShowDebug() {
 	curr = head;
-	temp = curr;
 	while (curr != NULL) {
 		if (curr == head) {
-			std::cout << "List Structure: |" << curr->data << ": " << &curr->data << "|";
+			std::cout << "List Structure: |" << curr->data << ": " << &curr->data << "|" << "--" << curr->next << "-->  ";
 		}
 		else {
-			std::cout << "--" << temp->next << "-->  " <<"|" << curr->data << ": " << &curr->data << "|";
+			std::cout << "|" << curr->data << ": " << &curr->data << "|" << "--" << curr->next << "-->  ";
 		}
-		temp = curr;
 		curr = curr->next;
 	}
-	std::cout << "--" << temp->next << "-->  ";
 	std::cout << std::endl;
 }
 
