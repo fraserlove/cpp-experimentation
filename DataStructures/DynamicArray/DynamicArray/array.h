@@ -23,6 +23,7 @@ private:
 public:
 	Array();
 	Array(int size);
+	Array(T data[], int size);
 	~Array();
 
 	void Set(int idx, T data); // Sets a specified index in the dynamic array to a specified value

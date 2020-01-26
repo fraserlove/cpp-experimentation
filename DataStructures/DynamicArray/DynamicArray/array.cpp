@@ -21,6 +21,14 @@ Array<T>::Array(int size) {
 }
 
 template <class T>
+Array<T>::Array(T data[], int size) {
+	len = 0;
+	cap = size;
+	s_array = new T[cap];
+	Push(data, size);
+}
+
+template <class T>
 Array<T>::~Array() {
 	delete s_array;
 }

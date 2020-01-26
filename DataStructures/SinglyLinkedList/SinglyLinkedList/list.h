@@ -2,7 +2,7 @@
 Linked List Implementation
 Developed by Fraser Love
 Created 17/01/20
-Latest Release 24/01/20
+Latest Release 26/01/20
 
 Uses C++ Templates and can be used with integers, floats and characters
 */
@@ -21,15 +21,15 @@ private:
 	node* curr;
 	node* temp;
 
-	void initPtrs(); // Initialises pointers to null
+	int size;
 
 public:
 	List();
-	List(T initArray[], int size);
+	List(T data[], int size);
 	~List();
 
 	void AddNode(T data); // Adds a new node to the end of the linked list with the data specified
-	void AddNode(int idx, T data); // Ades a new node to the linked list at a specific location with the data specified
+	void AddNode(int idx, T data); // Adds a new node to the linked list at a specific location with the data specified
 	void RemoveValue(T data); // Deletes the first instance of a node with a specified value in the linked list
 	void DeleteNode(int idx); // Deletes a node by its index in the linked list
 	void Update(int idx, T data); // Updates the data in a specific node with the new data supplied

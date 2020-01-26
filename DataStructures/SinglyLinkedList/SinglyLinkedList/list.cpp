@@ -4,14 +4,16 @@
 
 template <class T>
 List<T>::List() {
-	initPtrs();
+	head = NULL;
+	size = 0;
 }
 
 template <class T>
-List<T>::List(T initArray[], int size) {
-	initPtrs();
+List<T>::List(T data[], int size) {
+	head = NULL;
+	size = 0;
 	for (int i = 0; i < size; i++) {
-		AddNode(initArray[i]);
+		AddNode(data[i]);
 	}
 }
 
@@ -25,13 +27,6 @@ List<T>::~List () {
 		curr = temp;
 	}
 	head = NULL;
-}
-
-template <class T>
-void List<T>::initPtrs() {
-	head = NULL;
-	curr = NULL;
-	temp = NULL;
 }
 
 template <class T>
