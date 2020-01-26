@@ -115,6 +115,17 @@ void DynamicArray<T>::Clear() {
 }
 
 template <class T>
+void DynamicArray<T>::Reverse() {
+	T* new_array = new T[cap];
+	for (int i = 0; i < len; i++) {
+		new_array[i] = s_array[len-i-1];
+	}
+	T* temp = s_array;
+	s_array = new_array;
+	delete temp;
+}
+
+template <class T>
 void DynamicArray<T>::Show() {
 	for (int i = 0; i < len; i++) {
 		if (i == 0) {

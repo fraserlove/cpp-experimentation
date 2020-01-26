@@ -32,6 +32,7 @@ public:
 	void Insert(int idx, T data); // Adds either a single data item or multiple data items from a static array to a specified index in the dynamic array
 	void Insert(int idx, T data[], int size);
 	void Clear(); // Overwrites all data in the dynamic array to NULL and resizes array to minimum value
+	void Reverse(); // Reverses all elements in the entire dynamic array
 	void Show(); // Displays the entire dynamic array
 	void ShowAsString(); // Displays the entire dynamic array without any formatting
 	void ShowDebug(); // Displays the entire dynamic array, showing the total capacity of the static array and the section currently in use
