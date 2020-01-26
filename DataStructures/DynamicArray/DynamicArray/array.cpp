@@ -3,13 +3,13 @@
 #include "array.h"
 
 template <class T>
-Array<T>::Array() {
+DynamicArray<T>::DynamicArray() {
 	len = 0;
 	cap = MIN_CAPACITY;
 }
 
 template <class T>
-Array<T>::Array(int size) {
+DynamicArray<T>::DynamicArray(int size) {
 	len = 0;
 	if (size < 1) {
 		std::cout << "ERROR: Illegal capacity " << size << " entered" << std::endl;
@@ -21,7 +21,7 @@ Array<T>::Array(int size) {
 }
 
 template <class T>
-Array<T>::Array(T data[], int size) {
+DynamicArray<T>::DynamicArray(T data[], int size) {
 	len = 0;
 	cap = size;
 	s_array = new T[cap];
@@ -29,12 +29,12 @@ Array<T>::Array(T data[], int size) {
 }
 
 template <class T>
-Array<T>::~Array() {
+DynamicArray<T>::~DynamicArray() {
 	delete s_array;
 }
 
 template <class T>
-void Array<T>::Set(int idx, T data) {
+void DynamicArray<T>::Set(int idx, T data) {
 	if (idx < len && idx >= 0) {
 		s_array[idx] = data;
 	}
@@ -44,7 +44,7 @@ void Array<T>::Set(int idx, T data) {
 }
 
 template <class T>
-void Array<T>::Push(T data) {
+void DynamicArray<T>::Push(T data) {
 	if (len + 1 >= cap) {
 		cap *= GROWTH_FACTOR;
 		T* new_array = new T[cap];
@@ -59,14 +59,14 @@ void Array<T>::Push(T data) {
 }
 
 template <class T>
-void Array<T>::Push(T data[], int size) {
+void DynamicArray<T>::Push(T data[], int size) {
 	for (int i = 0; i < size; i++) {
 		Push(data[i]);
 	}
 }
 
 template <class T>
-void Array<T>::Insert(int idx, T data) {
+void DynamicArray<T>::Insert(int idx, T data) {
 	if (idx < len + 1 && idx >= 0) {
 		if (len + 1 >= cap) {
 			cap *= GROWTH_FACTOR;
@@ -90,7 +90,7 @@ void Array<T>::Insert(int idx, T data) {
 }
 
 template <class T>
-void Array<T>::Insert(int idx, T data[], int size) {
+void DynamicArray<T>::Insert(int idx, T data[], int size) {
 	if (idx >= len) {
 		std::cout << "ERROR: Index " << idx << " outwith array bounds" << std::endl;
 	}
@@ -102,7 +102,7 @@ void Array<T>::Insert(int idx, T data[], int size) {
 }
 
 template <class T>
-void Array<T>::Clear() {
+void DynamicArray<T>::Clear() {
 	for (int i = 0; i < cap; i++) {
 		s_array[i] = NULL;
 	}
@@ -115,7 +115,7 @@ void Array<T>::Clear() {
 }
 
 template <class T>
-void Array<T>::Show() {
+void DynamicArray<T>::Show() {
 	for (int i = 0; i < len; i++) {
 		if (i == 0) {
 			std::cout << s_array[i];
@@ -128,7 +128,7 @@ void Array<T>::Show() {
 }
 
 template <class T>
-void Array<T>::ShowAsString() {
+void DynamicArray<T>::ShowAsString() {
 	for (int i = 0; i < len; i++) {
 		std::cout << s_array[i];
 	}
@@ -136,7 +136,7 @@ void Array<T>::ShowAsString() {
 }
 
 template <class T>
-void Array<T>::ShowDebug() {
+void DynamicArray<T>::ShowDebug() {
 	for (int i = 0; i < cap; i++) {
 		if (i == 0) {
 			std::cout << "(" << i << ": " << s_array[i] << ")";
@@ -155,13 +155,13 @@ void Array<T>::ShowDebug() {
 }
 
 template <class T>
-int Array<T>::Length() { return len; }
+int DynamicArray<T>::Length() { return len; }
 
 template <class T>
-int Array<T>::IsEmpty() { return Length() == 0; }
+int DynamicArray<T>::IsEmpty() { return Length() == 0; }
 
 template <class T>
-int Array<T>::Find(T data) {
+int DynamicArray<T>::Find(T data) {
 	for (int i = 0; i < len; i++) {
 		if (s_array[i] == data) {
 			return i;
@@ -171,7 +171,7 @@ int Array<T>::Find(T data) {
 }
 
 template <class T>
-bool Array<T>::RemoveValue(T data) {
+bool DynamicArray<T>::RemoveValue(T data) {
 	for (int i = 0; i < len; i++) {
 		if (s_array[i] == data) {
 			Remove(i);
@@ -182,12 +182,12 @@ bool Array<T>::RemoveValue(T data) {
 }
 
 template <class T>
-bool Array<T>::Contains(T data) {
+bool DynamicArray<T>::Contains(T data) {
 	return Find(data) != -1;
 }
 
 template <class T>
-T Array<T>::Access(int idx) { 
+T DynamicArray<T>::Access(int idx) { 
 	if (idx < len && idx >= 0) {
 		return s_array[idx];
 	}
@@ -197,7 +197,7 @@ T Array<T>::Access(int idx) {
 }
 
 template <class T>
-T Array<T>::Pop() {
+T DynamicArray<T>::Pop() {
 	if ((len - 2) < (cap / DECAY_FACTOR)) {
 		cap /= DECAY_FACTOR;
 		T* new_array = new T[cap];
@@ -213,7 +213,7 @@ T Array<T>::Pop() {
 }
 
 template <class T>
-T Array<T>::Remove(int idx) {
+T DynamicArray<T>::Remove(int idx) {
 	if (idx < len && idx >= 0) {
 		T data = s_array[idx];
 		if (len-2 < (cap / DECAY_FACTOR)) {
@@ -241,8 +241,8 @@ T Array<T>::Remove(int idx) {
 }
 
 template <class T>
-Array<int>* Array<T>::FindAll(T data) {
-	Array<int>* indices = new Array<int>();
+DynamicArray<int>* DynamicArray<T>::FindAll(T data) {
+	DynamicArray<int>* indices = new DynamicArray<int>();
 	for (int i = 0; i < len; i++) {
 		if (s_array[i] == data) {
 			indices->Push(i);
@@ -252,6 +252,6 @@ Array<int>* Array<T>::FindAll(T data) {
 }
 
 // Template Definitions
-template class Array<int>;
-template class Array<float>;
-template class Array<char>;
+template class DynamicArray<int>;
+template class DynamicArray<float>;
+template class DynamicArray<char>;

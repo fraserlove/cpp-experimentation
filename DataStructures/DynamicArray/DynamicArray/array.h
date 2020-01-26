@@ -10,7 +10,7 @@ Uses C++ Templates and can be used with integers, floats and characters
 #pragma once
 
 template <class T>
-class Array {
+class DynamicArray {
 private:
 	T* s_array;
 	int len;
@@ -21,10 +21,10 @@ private:
 	int MIN_CAPACITY = 1; // Minimum size of the static array
 
 public:
-	Array();
-	Array(int size);
-	Array(T data[], int size);
-	~Array();
+	DynamicArray();
+	DynamicArray(int size);
+	DynamicArray(T data[], int size);
+	~DynamicArray();
 
 	void Set(int idx, T data); // Sets a specified index in the dynamic array to a specified value
 	void Push(T data); // Adds either single data item or multiple data items from a static array to the end of the dynamic array
@@ -47,5 +47,5 @@ public:
 	T Pop(); // Removes the last element from the dynamic arrayand returns its value
 	T Remove(int idx); // Removes the element from the specific index specified in the dynamic array and returns its value
 
-	Array<int>* FindAll(T data); // Returns a new dynamic array of all of the indices where an instance of a specific value was found in the dynamic array
+	DynamicArray<int>* FindAll(T data); // Returns a new dynamic array of all of the indices where an instance of a specific value was found in the dynamic array
 };
