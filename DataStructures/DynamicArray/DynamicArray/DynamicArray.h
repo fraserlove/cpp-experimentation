@@ -2,7 +2,7 @@
 Dynamic Array Implementation Using Static Arrays
 Developed by Fraser Love
 Created 24/01/20
-Latest Release 24/01/20
+Latest Release 26/01/20
 
 Uses C++ Templates and can be used with integers, floats and characters
 */
