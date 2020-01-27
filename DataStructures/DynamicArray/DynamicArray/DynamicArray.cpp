@@ -169,9 +169,6 @@ template <class T>
 int DynamicArray<T>::Length() { return len; }
 
 template <class T>
-int DynamicArray<T>::IsEmpty() { return Length() == 0; }
-
-template <class T>
 int DynamicArray<T>::Find(T data) {
 	for (int i = 0; i < len; i++) {
 		if (s_array[i] == data) {
@@ -180,6 +177,9 @@ int DynamicArray<T>::Find(T data) {
 	}
 	return -1;
 }
+
+template <class T>
+bool DynamicArray<T>::IsEmpty() { return Length() == 0; }
 
 template <class T>
 bool DynamicArray<T>::RemoveValue(T data) {
