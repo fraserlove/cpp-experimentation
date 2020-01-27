@@ -16,9 +16,9 @@ private:
 	int len;
 	int cap;
 
-	int GROWTH_FACTOR = 2; // Controls the rate of dynamic resizing (using Push() and Insert()) of the static array, higher value decreases execution time of Pop() and Remove(), lower decreases space used by static array
-	int DECAY_FACTOR = 4; // Controls the rate of dynamic resizing (using Pop() and Remove()) of the static array, higher value decreases execution time of Pop() and Remove(), lower decreases space used by static array
-	int MIN_CAPACITY = 1; // Minimum size of the static array
+	const int GROWTH_FACTOR = 2; // Controls the rate of dynamic resizing (using Push() and Insert()) of the static array, higher value decreases execution time of Pop() and Remove(), lower decreases space used by static array
+	const int DECAY_FACTOR = 4; // Controls the rate of dynamic resizing (using Pop() and Remove()) of the static array, higher value decreases execution time of Pop() and Remove(), lower decreases space used by static array
+	const int MIN_CAPACITY = 1; // Minimum size of the static array
 
 public:
 	DynamicArray();
