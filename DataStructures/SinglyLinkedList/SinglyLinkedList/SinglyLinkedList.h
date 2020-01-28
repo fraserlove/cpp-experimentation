@@ -20,6 +20,7 @@ private:
 	Node* head;
 	Node* curr;
 	Node* temp;
+	Node* tail; // Tail pointer used for constant time insertion at the end of the linked list
 
 	int len;
 

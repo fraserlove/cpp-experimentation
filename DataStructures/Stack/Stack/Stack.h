@@ -6,7 +6,7 @@ Latest Release 27/01/20
 
 Uses C++ Templates and can be used with integers, floats and characters
 Singly linked list implementation from data-structures library
-Linked list insertion and deletion at head is used for constant time Pop() and Push() operatons
+Linked list insertion and deletion at head allow for constant time Pop() and Push() operations
 */
 
 #pragma once

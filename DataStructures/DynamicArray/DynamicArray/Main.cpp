@@ -8,5 +8,4 @@ int main() {
 	Array.ShowDebug();
 	Array.Reverse();
 	Array.Show();
-
 }

@@ -210,25 +210,30 @@ T DynamicArray<T>::Access(int idx) {
 
 template <class T>
 T DynamicArray<T>::Pop() {
-	if ((len - 2) < (cap / DECAY_FACTOR)) {
-		cap /= DECAY_FACTOR;
-		T* new_array = new T[cap];
-		for (int i = 0; i < len-1; i++) {
-			new_array[i] = s_array[i];
-		}
-		T* temp = s_array;
-		s_array = new_array;
-		delete temp;
+	if (IsEmpty()) {
+		std::cout << "ERROR: Dynamic array is empty" << std::endl;
 	}
-	len--;
-	return s_array[len];
+	else {
+		if ((len - 1) < (cap / DECAY_FACTOR)) {
+			cap /= DECAY_FACTOR;
+			T* new_array = new T[cap];
+			for (int i = 0; i < len; i++) {
+				new_array[i] = s_array[i];
+			}
+			T* temp = s_array;
+			s_array = new_array;
+			delete temp;
+		}
+		len--;
+		return s_array[len];
+	}
 }
 
 template <class T>
 T DynamicArray<T>::Remove(int idx) {
 	if (idx < len && idx >= 0) {
 		T data = s_array[idx];
-		if (len-2 < (cap / DECAY_FACTOR)) {
+		if ((len-1) < (cap / DECAY_FACTOR)) {
 			cap /= DECAY_FACTOR;
 			T* new_array = new T[cap];
 			for (int i = 0, j = 0; i < len; i++, j++) {
@@ -248,7 +253,6 @@ T DynamicArray<T>::Remove(int idx) {
 	}
 	else {
 		std::cout << "ERROR: Index " << idx << " outwith array bounds" << std::endl;
-		return -1;
 	}
 }
 

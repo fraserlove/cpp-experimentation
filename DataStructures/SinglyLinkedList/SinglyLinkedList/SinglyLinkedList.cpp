@@ -4,13 +4,13 @@
 
 template <class T>
 SinglyLinkedList<T>::SinglyLinkedList() {
-	head = NULL;
+	head = tail = NULL;
 	len = 0;
 }
 
 template <class T>
 SinglyLinkedList<T>::SinglyLinkedList(T data[], int size) {
-	head = NULL;
+	head = tail = NULL;
 	len = 0;
 	for (int i = 0; i < size; i++) {
 		Add(data[i]);
@@ -26,7 +26,7 @@ SinglyLinkedList<T>::~SinglyLinkedList () {
 		delete curr;
 		curr = temp;
 	}
-	head = NULL;
+	head = tail = NULL;
 }
 
 template <class T>
@@ -51,15 +51,12 @@ void SinglyLinkedList<T>::Add(T data) {
 	new_node->next = NULL;
 	new_node->data = data;
 	if (head != NULL) {
-		curr = head;
-		while (curr->next != NULL) {
-			curr = curr->next;
-		}
-		curr->next = new_node;
+		tail->next = new_node;
 	}
 	else {
-		head = new_node;
+		head = tail = new_node;
 	}
+	tail = new_node;
 	len++;
 }
 
@@ -89,6 +86,7 @@ void SinglyLinkedList<T>::Add(int idx, T data) {
 			temp->next = new_node;
 			new_node->next = curr;
 		}
+		tail = new_node;
 		len++;
 	}
 }
@@ -104,7 +102,7 @@ void SinglyLinkedList<T>::Clear() {
 		del_ptr->data == NULL;
 		delete del_ptr;
 	}
-	head = NULL;
+	head = tail = NULL;
 	len = 0;
 }
 
@@ -114,7 +112,7 @@ void SinglyLinkedList<T>::Reverse() {
 		std::cout << "ERROR: List is empty" << std::endl;
 	}
 	else {
-		curr = head;
+		tail = curr = head;
 		temp = curr->next;
 		curr->next = NULL;
 
@@ -165,7 +163,7 @@ void SinglyLinkedList<T>::ShowDebug() {
 		}
 		curr = curr->next;
 	}
-	std::cout << std::endl;
+	std::cout << std::endl << "Tail: " << tail << std::endl;
 }
 
 template <class T>
@@ -218,6 +216,9 @@ bool SinglyLinkedList<T>::RemoveValue(T data) {
 		if (del_ptr == head) {
 			head = head->next;
 		}
+		else if (del_ptr == tail) {
+			tail = temp;
+		}
 		delete del_ptr;
 		len--;
 		return true;
@@ -258,7 +259,6 @@ T SinglyLinkedList<T>::Peek() {
 template <class T>
 T SinglyLinkedList<T>::Remove(int idx) {
 	temp = curr = head;
-	T r_data = -1;
 	if (idx >= len || idx < 0 || IsEmpty()) {
 		std::cout << "ERROR: Index " << idx << " outwith list bounds" << std::endl;
 	}
@@ -278,12 +278,15 @@ T SinglyLinkedList<T>::Remove(int idx) {
 			del_ptr = curr;
 			curr = curr->next;
 			temp->next = curr;
+			if (del_ptr == tail) {
+				tail = temp;
+			}
 		}
-		r_data = del_ptr->data;
+		T r_data = del_ptr->data;
 		delete del_ptr;
 		len--;
+		return r_data;
 	}
-	return r_data;
 }
 
 // Template Definitions

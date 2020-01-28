@@ -53,18 +53,20 @@ template <class T>
 T Stack<T>::Pop() {
 	if (IsEmpty()) {
 		std::cout << "ERROR: Stack is empty" << std::endl;
-		return -1;
 	}
-	return list.Remove(0);
+	else {
+		return list.Remove(0);
+	}
 }
 
 template <class T>
 T Stack<T>::Peek() {
 	if (IsEmpty()) {
 		std::cout << "ERROR: Stack is empty" << std::endl;
-		return -1;
 	}
-	return list.Peek();
+	else {
+		return list.Peek();
+	}
 }
 
 // Template Definitions
