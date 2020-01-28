@@ -26,7 +26,7 @@ public:
 	DynamicArray(T data[], int size);
 	~DynamicArray();
 
-	void Set(int idx, T data); // Sets a specified index in the dynamic array to a specified value
+	void Set(int idx, T data); // Sets a specified index in the dynamic array to a specific value
 	void Push(T data); // Adds either single data item or multiple data items from a static array to the end of the dynamic array
 	void Push(T data[], int size);
 	void Insert(int idx, T data); // Adds either a single data item or multiple data items from a static array to a specified index in the dynamic array
@@ -37,12 +37,12 @@ public:
 	void ShowAsString(); // Displays the entire dynamic array without any formatting
 	void ShowDebug(); // Displays the entire dynamic array, showing the total capacity of the static array and the section currently in use
 	
-	int Length(); // Returns the integer length of the dynamic array
-	int Find(T data); // Returns the position of the first instance of a specific value in the dynamic array, returns -1 if no instance as found
+	int Length(); // Returns the length of the dynamic array
+	int Find(T data); // Returns the position of the first instance of a specific object in the dynamic array
 
-	bool IsEmpty(); // Returns a boolean to check if the dynamic array is empty
-	bool RemoveValue(T data); // Removes a specific value from the dynamic array and returns a true if the value was found and removed
-	bool Contains(T data); //  Returns true if specified value is present in the dynamic array, if not returns false
+	bool IsEmpty(); // Checks if the dynamic array is empty
+	bool RemoveValue(T data); // Removes a specific value from the dynamic array
+	bool Contains(T data); //  Checks if an object is present in the dynamic array
 
 	T Access(int idx); // Returns the value held at a specific index in the dynamic array
 	T Pop(); // Removes the last element from the dynamic array and returns its value
