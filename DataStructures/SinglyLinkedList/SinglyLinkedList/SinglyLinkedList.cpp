@@ -20,6 +20,7 @@ SinglyLinkedList<T>::SinglyLinkedList(T data[], int size) {
 template <class T>
 SinglyLinkedList<T>::~SinglyLinkedList () {
 	temp = curr = head;
+	len = 0;
 	while (curr != NULL) {
 		temp = curr->next;
 		delete curr;

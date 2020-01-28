@@ -30,6 +30,7 @@ DynamicArray<T>::DynamicArray(T data[], int size) {
 
 template <class T>
 DynamicArray<T>::~DynamicArray() {
+	len = 0;
 	delete s_array;
 }
 
