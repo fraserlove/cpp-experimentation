@@ -233,21 +233,21 @@ template <class T>
 T DynamicArray<T>::Remove(int idx) {
 	if (idx < len && idx >= 0) {
 		T data = s_array[idx];
-		if ((len-1) < (cap / DECAY_FACTOR)) {
+		if ((len - 1) < (cap / DECAY_FACTOR)) {
 			cap /= DECAY_FACTOR;
-			T* new_array = new T[cap];
-			for (int i = 0, j = 0; i < len; i++, j++) {
-				if (i == idx) {
-					j--;
-				}
-				else {
-					new_array[j] = s_array[i];
-				}
-			}
-			T* temp = s_array;
-			s_array = new_array;
-			delete temp;
 		}
+		T* new_array = new T[cap];
+		for (int i = 0, j = 0; i < len; i++, j++) {
+			if (i == idx) {
+				j--;
+			}
+			else {
+				new_array[j] = s_array[i];
+			}
+		}
+		T* temp = s_array;
+		s_array = new_array;
+		delete temp;
 		len--;
 		return data;
 	}

@@ -17,6 +17,7 @@ template <class T>
 class Queue {
 private:
 	SinglyLinkedList<T> list;
+
 public:
 	Queue();
 	Queue(T data);
