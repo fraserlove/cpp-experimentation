@@ -3,13 +3,10 @@
 #include "Stack.h"
 
 template <class T>
-Stack<T>::Stack() {
-}
+Stack<T>::Stack() {}
 
 template <class T>
-Stack<T>::Stack(T data) {
-	Push(data);
-}
+Stack<T>::Stack(T data) { Push(data); }
 
 template <class T>
 Stack<T>::Stack(T data[], int size) {
@@ -19,19 +16,13 @@ Stack<T>::Stack(T data[], int size) {
 }
 
 template <class T>
-Stack<T>::~Stack() {
-	list.~SinglyLinkedList();
-}
+Stack<T>::~Stack() { list.~SinglyLinkedList(); }
 
 template <class T>
-void Stack<T>::Push(T data) {
-	list.Add(0, data);
-}
+void Stack<T>::Push(T data) { list.Add(0, data); }
 
 template <class T>
-void Stack<T>::Clear() {
-	list.Clear();
-}
+void Stack<T>::Clear() { list.Clear(); }
 
 template <class T>
 void Stack<T>::Show() {
@@ -40,14 +31,10 @@ void Stack<T>::Show() {
 }
 
 template <class T>
-int Stack<T>::Length() {
-	return list.Length();
-}
+int Stack<T>::Length() { return list.Length(); }
 
 template <class T>
-bool Stack<T>::IsEmpty() {
-	return Length() == 0;
-}
+bool Stack<T>::IsEmpty() { return Length() == 0; }
 
 template <class T>
 T Stack<T>::Pop() {

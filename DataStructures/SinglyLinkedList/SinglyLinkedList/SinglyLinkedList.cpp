@@ -65,7 +65,7 @@ void SinglyLinkedList<T>::Add(int idx, T data) {
 	if (idx == len) { // Add to End
 		Add(data);
 	}
-	else if (idx > len-1 || idx < 0) {
+	else if (idx > len - 1 || idx < 0) {
 		std::cout << "ERROR: Index " << idx << " outwith list bounds" << std::endl;
 	}
 	else {
@@ -226,9 +226,7 @@ bool SinglyLinkedList<T>::RemoveValue(T data) {
 }
 
 template <class T>
-bool SinglyLinkedList<T>::Contains(T data) {
-	return Find(data) != -1;
-}
+bool SinglyLinkedList<T>::Contains(T data) { return Find(data) != -1; }
 
 template <class T>
 T SinglyLinkedList<T>::Access(int idx) {

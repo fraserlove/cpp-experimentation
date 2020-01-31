@@ -3,13 +3,10 @@
 #include "Queue.h"
 
 template <class T>
-Queue<T>::Queue() {
-}
+Queue<T>::Queue() {}
 
 template <class T>
-Queue<T>::Queue(T data) {
-	Enqueue(data);
-}
+Queue<T>::Queue(T data) { Enqueue(data); }
 
 template <class T>
 Queue<T>::Queue(T data[], int size) {
@@ -19,19 +16,13 @@ Queue<T>::Queue(T data[], int size) {
 }
 
 template <class T>
-Queue<T>::~Queue() {
-	list.~SinglyLinkedList();
-}
+Queue<T>::~Queue() { list.~SinglyLinkedList(); }
 
 template <class T>
-void Queue<T>::Enqueue(T data) {
-	list.Add(Length(), data);
-}
+void Queue<T>::Enqueue(T data) { list.Add(Length(), data); }
 
 template <class T>
-void Queue<T>::Clear() {
-	list.Clear();
-}
+void Queue<T>::Clear() { list.Clear(); }
 
 template <class T>
 void Queue<T>::Show() {
@@ -40,14 +31,10 @@ void Queue<T>::Show() {
 }
 
 template <class T>
-int Queue<T>::Length() {
-	return list.Length();
-}
+int Queue<T>::Length() { return list.Length(); }
 
 template <class T>
-bool Queue<T>::IsEmpty() {
-	return Length() == 0;
-}
+bool Queue<T>::IsEmpty() { return Length() == 0; }
 
 template <class T>
 T Queue<T>::Dequeue() {

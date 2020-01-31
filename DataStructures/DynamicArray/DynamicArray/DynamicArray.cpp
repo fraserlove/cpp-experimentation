@@ -194,9 +194,7 @@ bool DynamicArray<T>::RemoveValue(T data) {
 }
 
 template <class T>
-bool DynamicArray<T>::Contains(T data) {
-	return Find(data) != -1;
-}
+bool DynamicArray<T>::Contains(T data) { return Find(data) != -1; }
 
 template <class T>
 T DynamicArray<T>::Access(int idx) { 
