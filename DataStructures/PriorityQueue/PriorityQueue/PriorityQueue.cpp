@@ -3,22 +3,25 @@
 #include "PriorityQueue.h"
 
 template <class T>
-PQueue<T>::PQueue() {
+PQueue<T>::PQueue(bool min_heap) {
 	heap = new DynamicArray<T>(1);
+	is_min_heap = min_heap;
 }
 
 template <class T>
-PQueue<T>::PQueue(int size) {
+PQueue<T>::PQueue(int size, bool min_heap) {
 	heap = new DynamicArray<T>(size);
+	is_min_heap = min_heap;
 }
 
 template <class T>
-PQueue<T>::PQueue(T data[], int size) {
+PQueue<T>::PQueue(T data[], int size, bool min_heap) {
 	heap = new DynamicArray<T>(size);
+	is_min_heap = min_heap;
 	for (int i = 0; i < size; i++) {
 		heap->Push(data[i]);
 	}
-	for (int i = 0; i < (size / 2) - 1; i++) {
+	for (int i = (size / 2) - 1; i >= 0; i--) {
 		HeapifyDown(i);
 	}
 }
@@ -73,23 +76,34 @@ bool PQueue<T>::Contains(T data) {
 }
 
 template <class T>
-bool PQueue<T>::IsMin(int idx) {
+bool PQueue<T>::ValidHeap(int idx) {
 	if (Length() > 1) {
 		if (idx >= Length()) {
 			return true;
 		}
-		int l_idx = 2 * idx + 1;
-		int r_idx = 2 * idx + 2;
-		if ((l_idx < Length() && !Less(idx, l_idx)) || (r_idx < Length() && !Less(idx, r_idx))) {
+		int l_idx = LeftChild(idx);
+		int r_idx = RightChild(idx);
+		if ((l_idx < Length() && !Comparison(idx, l_idx)) || (r_idx < Length() && !Comparison(idx, r_idx))) {
 			return false;
 		}
-		return IsMin(l_idx) && IsMin(r_idx);
+		return ValidHeap(l_idx) && ValidHeap(r_idx);
 	}
 	else {
 		std::cout << "ERROR: Heap to small to determine nature" << std::endl;
 		return false;
 	}
 }
+
+template <class T>
+bool PQueue<T>::IsMin() {
+	if (ValidHeap() && is_min_heap) {
+		return true;
+	}
+	return false;
+}
+
+template <class T>
+bool PQueue<T>::IsMax() { return !IsMin(); }
 
 template <class T>
 T PQueue<T>::Dequeue() {
@@ -106,7 +120,7 @@ T PQueue<T>::Peek() {
 template <class T>
 void PQueue<T>::HeapifyUp(int idx) {
 	int parent_idx = Parent(idx);
-	while (idx > 0 && Less(idx, parent_idx)) {
+	while (idx > 0 && Comparison(idx, parent_idx)) {
 		Swap(parent_idx, idx);
 		idx = parent_idx;
 		parent_idx = Parent(idx);
@@ -118,10 +132,10 @@ void PQueue<T>::HeapifyDown(int idx) {
 	int l_idx = LeftChild(idx);
 	int r_idx = RightChild(idx);
 	int min_idx = idx;
-	if ((l_idx < Length()) && Less(l_idx, min_idx)) {
+	if ((l_idx < Length()) && Comparison(l_idx, min_idx)) {
 		min_idx = l_idx;
 	}
-	if ((r_idx < Length()) && Less(r_idx, min_idx)) {
+	if ((r_idx < Length()) && Comparison(r_idx, min_idx)) {
 		min_idx = r_idx;
 	}
 	if (min_idx != idx) {
@@ -152,6 +166,14 @@ bool PQueue<T>::Less(int idx_1, int idx_2) {
 	T node_1 = heap->Access(idx_1);
 	T node_2 = heap->Access(idx_2);
 	return (node_1 <= node_2);
+}
+
+template <class T>
+bool PQueue<T>::Comparison(int idx_1, int idx_2) {
+	if (is_min_heap) {
+		return Less(idx_1, idx_2);
+	}
+	return !Less(idx_1, idx_2);
 }
 
 template <class T>
