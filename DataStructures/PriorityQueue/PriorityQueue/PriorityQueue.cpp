@@ -3,21 +3,21 @@
 #include "PriorityQueue.h"
 
 template <class T>
-PQueue<T>::PQueue(bool min_heap) {
+PQueue<T>::PQueue(bool heap_type) {
 	heap = new DynamicArray<T>(1);
-	is_min_heap = min_heap;
+	is_max_heap = heap_type;
 }
 
 template <class T>
-PQueue<T>::PQueue(int size, bool min_heap) {
+PQueue<T>::PQueue(int size, bool heap_type) {
 	heap = new DynamicArray<T>(size);
-	is_min_heap = min_heap;
+	is_max_heap = heap_type;
 }
 
 template <class T>
-PQueue<T>::PQueue(T data[], int size, bool min_heap) {
+PQueue<T>::PQueue(T data[], int size, bool heap_type) {
 	heap = new DynamicArray<T>(size);
-	is_min_heap = min_heap;
+	is_max_heap = heap_type;
 	for (int i = 0; i < size; i++) {
 		heap->Push(data[i]);
 	}
@@ -66,7 +66,6 @@ bool PQueue<T>::RemoveValue(T data) {
 
 template <class T>
 bool PQueue<T>::Contains(T data) {
-	// Hash table lookup needed for O(1)
 	for (int i = 0; i < Length(); i++) {
 		if (heap->Access(i) == data) {
 			return true;
@@ -83,7 +82,7 @@ bool PQueue<T>::ValidHeap(int idx) {
 		}
 		int l_idx = LeftChild(idx);
 		int r_idx = RightChild(idx);
-		if ((l_idx < Length() && !Comparison(idx, l_idx)) || (r_idx < Length() && !Comparison(idx, r_idx))) {
+		if ((l_idx < Length() && !Compare(idx, l_idx)) || (r_idx < Length() && !Compare(idx, r_idx))) {
 			return false;
 		}
 		return ValidHeap(l_idx) && ValidHeap(r_idx);
@@ -95,15 +94,15 @@ bool PQueue<T>::ValidHeap(int idx) {
 }
 
 template <class T>
-bool PQueue<T>::IsMin() {
-	if (ValidHeap() && is_min_heap) {
+bool PQueue<T>::IsMax() {
+	if (ValidHeap() && is_max_heap) {
 		return true;
 	}
 	return false;
 }
 
 template <class T>
-bool PQueue<T>::IsMax() { return !IsMin(); }
+bool PQueue<T>::IsMin() { return !IsMax(); }
 
 template <class T>
 T PQueue<T>::Dequeue() {
@@ -115,12 +114,10 @@ T PQueue<T>::Peek() {
 	return heap->Access(0);
 }
 
-/* Private Methods */
-
 template <class T>
 void PQueue<T>::HeapifyUp(int idx) {
 	int parent_idx = Parent(idx);
-	while (idx > 0 && Comparison(idx, parent_idx)) {
+	while (idx > 0 && Compare(idx, parent_idx)) {
 		Swap(parent_idx, idx);
 		idx = parent_idx;
 		parent_idx = Parent(idx);
@@ -132,10 +129,10 @@ void PQueue<T>::HeapifyDown(int idx) {
 	int l_idx = LeftChild(idx);
 	int r_idx = RightChild(idx);
 	int min_idx = idx;
-	if ((l_idx < Length()) && Comparison(l_idx, min_idx)) {
+	if ((l_idx < Length()) && Compare(l_idx, min_idx)) {
 		min_idx = l_idx;
 	}
-	if ((r_idx < Length()) && Comparison(r_idx, min_idx)) {
+	if ((r_idx < Length()) && Compare(r_idx, min_idx)) {
 		min_idx = r_idx;
 	}
 	if (min_idx != idx) {
@@ -162,18 +159,13 @@ template <class T>
 int PQueue<T>::RightChild(int idx) { return 2 * idx + 2; }
 
 template <class T>
-bool PQueue<T>::Less(int idx_1, int idx_2) {
+bool PQueue<T>::Compare(int idx_1, int idx_2) {
 	T node_1 = heap->Access(idx_1);
 	T node_2 = heap->Access(idx_2);
-	return (node_1 <= node_2);
-}
-
-template <class T>
-bool PQueue<T>::Comparison(int idx_1, int idx_2) {
-	if (is_min_heap) {
-		return Less(idx_1, idx_2);
+	if (!is_max_heap) {
+		return (node_1 <= node_2);
 	}
-	return !Less(idx_1, idx_2);
+	return(node_1 >= node_2);;
 }
 
 template <class T>
@@ -197,7 +189,6 @@ T PQueue<T>::Remove(int idx) {
 	}
 }
 
-// Template Definitions
 template class PQueue<int>;
 template class PQueue<float>;
 template class PQueue<char>;

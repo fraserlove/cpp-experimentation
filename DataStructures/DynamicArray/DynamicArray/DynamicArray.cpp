@@ -6,6 +6,7 @@ template <class T>
 DynamicArray<T>::DynamicArray() {
 	len = 0;
 	cap = MIN_CAPACITY;
+	s_array = new T[cap];
 }
 
 template <class T>
@@ -31,7 +32,7 @@ DynamicArray<T>::DynamicArray(T data[], int size) {
 template <class T>
 DynamicArray<T>::~DynamicArray() {
 	len = 0;
-	delete s_array;
+	delete[] s_array;
 }
 
 template <class T>
@@ -54,7 +55,7 @@ void DynamicArray<T>::Push(T data) {
 		}
 		T* temp = s_array;
 		s_array = new_array;
-		delete temp;
+		delete[] temp;
 	}
 	s_array[len++] = data;
 }
@@ -82,7 +83,7 @@ void DynamicArray<T>::Insert(int idx, T data) {
 		}
 		T* temp = s_array;
 		s_array = new_array;
-		delete temp;
+		delete[] temp;
 		len++;
 	}
 	else {
@@ -123,7 +124,7 @@ void DynamicArray<T>::Reverse() {
 	}
 	T* temp = s_array;
 	s_array = new_array;
-	delete temp;
+	delete[] temp;
 }
 
 template <class T>
@@ -220,7 +221,7 @@ T DynamicArray<T>::Pop() {
 			}
 			T* temp = s_array;
 			s_array = new_array;
-			delete temp;
+			delete[] temp;
 		}
 		len--;
 		return s_array[len];
@@ -245,7 +246,7 @@ T DynamicArray<T>::Remove(int idx) {
 		}
 		T* temp = s_array;
 		s_array = new_array;
-		delete temp;
+		delete[] temp;
 		len--;
 		return data;
 	}
@@ -265,7 +266,6 @@ DynamicArray<int>* DynamicArray<T>::FindAll(T data) {
 	return indices;
 }
 
-// Template Definitions
 template class DynamicArray<int>;
 template class DynamicArray<float>;
 template class DynamicArray<char>;

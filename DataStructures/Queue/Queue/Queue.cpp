@@ -56,7 +56,6 @@ T Queue<T>::Peek() {
 	}
 }
 
-// Template Definitions
 template class Queue<int>;
 template class Queue<float>;
 template class Queue<char>;

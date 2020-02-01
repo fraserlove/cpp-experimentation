@@ -56,7 +56,6 @@ T Stack<T>::Peek() {
 	}
 }
 
-// Template Definitions
 template class Stack<int>;
 template class Stack<float>;
 template class Stack<char>;

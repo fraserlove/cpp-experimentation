@@ -62,7 +62,7 @@ void SinglyLinkedList<T>::Add(T data) {
 
 template <class T>
 void SinglyLinkedList<T>::Add(int idx, T data) {
-	if (idx == len) { // Add to End
+	if (idx == len) {
 		Add(data);
 	}
 	else if (idx > len - 1 || idx < 0) {
@@ -71,11 +71,11 @@ void SinglyLinkedList<T>::Add(int idx, T data) {
 	else {
 		Node* new_node = new Node;
 		new_node->data = data;
-		if (idx == 0) { // Add to Start
+		if (idx == 0) {
 			new_node->next = head;
 			head = new_node;
 		}
-		else { // Add to Middle
+		else {
 			temp = curr = head;
 			int cIdx = 0;
 			while (cIdx != idx) {
@@ -262,7 +262,7 @@ T SinglyLinkedList<T>::Remove(int idx) {
 	}
 	else {
 		Node* del_ptr;
-		if (idx == 0) { // Remove from Start
+		if (idx == 0) {
 			del_ptr = head;
 			head = head->next;
 		}
@@ -287,7 +287,6 @@ T SinglyLinkedList<T>::Remove(int idx) {
 	}
 }
 
-// Template Definitions
 template class SinglyLinkedList<int>;
 template class SinglyLinkedList<float>;
 template class SinglyLinkedList<char>;
