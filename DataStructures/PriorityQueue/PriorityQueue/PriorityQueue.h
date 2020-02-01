@@ -2,7 +2,7 @@
  * Priority Queue Data Structure Implementation using Binary Heaps
  * Author: Fraser Love, me@fraserlove.com
  * Created: 29/01/20
- * Latest Release: 31/01/20
+ * Latest Release: 01/02/20
  * 
  * Max and min priority queue implementation using binary heaps. Binary heaps
  * implemented using dynamic arrays in DynamicArray class present in Fraser's
@@ -33,7 +33,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  * =============================================================================
- *
  **/
 
 #pragma once
@@ -60,14 +59,14 @@ private:
 	T Remove(int idx); // Removes a node at a specific index in the heap, O(n)
 
 public:
-	PQueue(bool heap_type = 0);
-	PQueue(int size, bool heap_type = 0);
+	PQueue(bool heap_type = 0); // O(1)
+	PQueue(int size, bool heap_type = 0); // O(1)
 	PQueue(T data[], int size, bool heap_type = 0); // Priority queue construction using HeapfiyDown(), O(n)
-	~PQueue();
+	~PQueue(); // O(1)
 
 	void Enqueue(T data); // Adds data to the priority queue and maintains the heap property, O(log(n))
-	void Clear(); // Overwrites all data in the priority queue and deallocates the heap from memory, O(1)
-	void ShowDebug(); // Shows the dynamic array used to represent the heap, O(n)
+	void Clear(); // Deallocates the heap from memory and creates a new heap, O(1)
+	void ShowDebug(); // Displays the dynamic array used to represent the heap, O(n)
 
 	int Length(); // Returns the length of the priority queue, O(1)
 

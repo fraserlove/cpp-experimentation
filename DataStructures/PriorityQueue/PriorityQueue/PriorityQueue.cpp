@@ -37,8 +37,8 @@ void PQueue<T>::Enqueue(T data) {
 
 template <class T>
 void PQueue<T>::Clear() {
-	heap->~DynamicArray();
 	delete heap;
+	heap = new DynamicArray<T>(1);
 }
 
 template <class T>

@@ -11,7 +11,7 @@ DynamicArray<T>::DynamicArray() {
 
 template <class T>
 DynamicArray<T>::DynamicArray(int size) {
-	len = 0;
+	len = cap = 0;
 	if (size < 1) {
 		std::cout << "ERROR: Illegal capacity " << size << " entered" << std::endl;
 	}
@@ -105,9 +105,6 @@ void DynamicArray<T>::Insert(int idx, T data[], int size) {
 
 template <class T>
 void DynamicArray<T>::Clear() {
-	for (int i = 0; i < cap; i++) {
-		s_array[i] = NULL;
-	}
 	len = 0;
 	cap = MIN_CAPACITY;
 	T* new_array = new T[cap];
