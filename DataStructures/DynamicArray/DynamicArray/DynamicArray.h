@@ -80,3 +80,7 @@ public:
 
 	DynamicArray<int>* FindAll(T data); // Returns a new dynamic array of all of the indices where an instance of a specific value was found, O(n)
 };
+
+template class DynamicArray<int>;
+template class DynamicArray<float>;
+template class DynamicArray<char>;

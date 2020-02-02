@@ -35,3 +35,7 @@ public:
 	T Dequeue(); // Remove an object from the front of the queue
 	T Peek(); // Returns the object at the front of the queue without removing it
 };
+
+template class Queue<int>;
+template class Queue<float>;
+template class Queue<char>;

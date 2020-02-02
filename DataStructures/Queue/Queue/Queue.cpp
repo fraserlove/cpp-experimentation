@@ -55,7 +55,3 @@ T Queue<T>::Peek() {
 		return list.Peek();
 	}
 }
-
-template class Queue<int>;
-template class Queue<float>;
-template class Queue<char>;

@@ -35,3 +35,7 @@ public:
 	T Pop(); // Pops an object off the stack
 	T Peek(); // Returns the object at the top of the stack without removing it
 };
+
+template class Stack<int>;
+template class Stack<float>;
+template class Stack<char>;

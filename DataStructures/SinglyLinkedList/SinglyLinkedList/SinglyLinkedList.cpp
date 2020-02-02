@@ -13,40 +13,33 @@ SinglyLinkedList<T>::SinglyLinkedList(T data[], int size) {
 	head = tail = NULL;
 	len = 0;
 	for (int i = 0; i < size; i++) {
-		Add(data[i]);
+		Push(data[i]);
 	}
 }
 
 template <class T>
 SinglyLinkedList<T>::~SinglyLinkedList () {
-	temp = curr = head;
-	len = 0;
-	while (curr != NULL) {
-		temp = curr->next;
-		delete curr;
-		curr = temp;
-	}
-	head = tail = NULL;
+	Clear();
 }
 
 template <class T>
 void SinglyLinkedList<T>::Set(int idx, T data) {
 	curr = head;
-	int cIdx = 0;
+	int cur_idx = 0;
 	if (idx >= len || idx < 0 || IsEmpty()) {
 		std::cout << "ERROR: Index " << idx << " outwith list bounds" << std::endl;
 	}
 	else {
-		while (cIdx != idx) {
+		while (cur_idx != idx) {
 			curr = curr->next;
-			cIdx++;
+			cur_idx++;
 		}
 		curr->data = data;
 	}
 }
 
 template <class T>
-void SinglyLinkedList<T>::Add(T data) {
+void SinglyLinkedList<T>::Push(T data) {
 	Node* new_node = new Node;
 	new_node->next = NULL;
 	new_node->data = data;
@@ -61,9 +54,9 @@ void SinglyLinkedList<T>::Add(T data) {
 }
 
 template <class T>
-void SinglyLinkedList<T>::Add(int idx, T data) {
+void SinglyLinkedList<T>::Insert(int idx, T data) {
 	if (idx == len) {
-		Add(data);
+		Push(data);
 	}
 	else if (idx > len - 1 || idx < 0) {
 		std::cout << "ERROR: Index " << idx << " outwith list bounds" << std::endl;
@@ -77,11 +70,11 @@ void SinglyLinkedList<T>::Add(int idx, T data) {
 		}
 		else {
 			temp = curr = head;
-			int cIdx = 0;
-			while (cIdx != idx) {
+			int cur_idx = 0;
+			while (cur_idx != idx) {
 				temp = curr;
 				curr = curr->next;
-				cIdx++;
+				cur_idx++;
 			}
 			temp->next = new_node;
 			new_node->next = curr;
@@ -93,17 +86,14 @@ void SinglyLinkedList<T>::Add(int idx, T data) {
 
 template <class T>
 void SinglyLinkedList<T>::Clear() {
-	curr = head;
+	temp = curr = head;
 	while (curr != NULL) {
-		Node* del_ptr = NULL;
-		del_ptr = curr;
-		curr = curr->next;
-		del_ptr->next == NULL;
-		del_ptr->data == NULL;
-		delete del_ptr;
+		temp = curr->next;
+		delete curr;
+		curr = temp;
 	}
-	head = tail = NULL;
 	len = 0;
+	head = tail = NULL;
 }
 
 template <class T>
@@ -184,19 +174,6 @@ int SinglyLinkedList<T>::Find(T data) {
 }
 
 template <class T>
-int* SinglyLinkedList<T>::ToArray() {
-	int* array = new int[len];
-	curr = head;
-	int cIdx = 0;
-	while (curr != NULL) {
-		array[cIdx] = curr->data;
-		curr = curr->next;
-		cIdx++;
-	}
-	return array;
-}
-
-template <class T>
 bool SinglyLinkedList<T>::IsEmpty() { return Length() == 0; }
 
 template <class T>
@@ -231,16 +208,35 @@ bool SinglyLinkedList<T>::Contains(T data) { return Find(data) != -1; }
 template <class T>
 T SinglyLinkedList<T>::Access(int idx) {
 	curr = head;
-	int cIdx = 0;
+	int cur_idx = 0;
 	if (idx >= len || idx < 0 || IsEmpty()) {
 		std::cout << "ERROR: Index " << idx << " outwith list bounds" << std::endl;
 	}
 	else {
-		while (cIdx != idx) {
+		while (cur_idx != idx) {
 			curr = curr->next;
-			cIdx++;
+			cur_idx++;
 		}
 		return curr->data;
+	}
+}
+
+template <class T>
+T SinglyLinkedList<T>::Pop() {
+	temp = curr = head;
+	if (IsEmpty()) {
+		std::cout << "ERROR: List is empty" << std::endl;
+	}
+	else {
+		while (curr != tail) {
+			temp = curr;
+			curr = curr->next;
+		}
+		T r_data = curr->data;
+		delete curr;
+		temp->next = NULL;
+		tail = temp;
+		return r_data;
 	}
 }
 
@@ -261,17 +257,16 @@ T SinglyLinkedList<T>::Remove(int idx) {
 		std::cout << "ERROR: Index " << idx << " outwith list bounds" << std::endl;
 	}
 	else {
-		Node* del_ptr;
+		Node* del_ptr = head;
 		if (idx == 0) {
-			del_ptr = head;
 			head = head->next;
 		}
 		else {
-			int cIdx = 0;
-			while (cIdx != idx) {
+			int cur_idx = 0;
+			while (cur_idx != idx) {
 				temp = curr;
 				curr = curr->next;
-				cIdx++;
+				cur_idx++;
 			}
 			del_ptr = curr;
 			curr = curr->next;
@@ -287,6 +282,17 @@ T SinglyLinkedList<T>::Remove(int idx) {
 	}
 }
 
-template class SinglyLinkedList<int>;
-template class SinglyLinkedList<float>;
-template class SinglyLinkedList<char>;
+template <class T>
+ArrayStruct<T>* SinglyLinkedList<T>::ToArray() {
+	ArrayStruct<T>* new_array = new ArrayStruct<T>;
+	new_array->array = new T[len];
+	new_array->size = len;
+	curr = head;
+	int cur_idx = 0;
+	while (curr != NULL) {
+		new_array->array[cur_idx] = curr->data;
+		curr = curr->next;
+		cur_idx++;
+	}
+	return new_array;
+}

@@ -55,7 +55,3 @@ T Stack<T>::Peek() {
 		return list.Peek();
 	}
 }
-
-template class Stack<int>;
-template class Stack<float>;
-template class Stack<char>;

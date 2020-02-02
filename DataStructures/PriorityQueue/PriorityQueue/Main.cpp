@@ -6,7 +6,7 @@
  *
  * This file is a standalone console IO system for interfacing with the prioity
  * queue data structure declared in "PriorityQueue.h". The data struture itself
- * is functionally independant from this file which is only used for demonstration
+ * is functionally independent from this file which is only used for demonstration
  * and testing purposes. All bugs and general issues with this data structue are
  * welcomed and can be submitted at the repository page on Github.
  * 
@@ -16,6 +16,7 @@
  **/
 
 #include <iostream>
+#include <climits>
 
 #include "PriorityQueue.h"
 
@@ -33,14 +34,15 @@ void PrintCommands() {
 	std::cout << " All Commands (Must be entered lower case):" << std::endl << std::endl;
 	std::cout << "     enqueue {value}" << std::endl << "     remove_value {value}" << std::endl << "     contains {value}" << std::endl;
 	std::cout << "     dequeue" << std::endl << "     peek" << std::endl << "     clear" << std::endl;
-	std::cout << "     show_debug" << std::endl << "     length" << std::endl << "     is_empty" << std::endl << "     contains" << std::endl;
-	std::cout << "     is_max" << std::endl << "     is_min" << std::endl << "     vaild_heap" << std::endl << std::endl;
+	std::cout << "     show_debug" << std::endl << "     length" << std::endl << "		find {index}" << std::endl << "     is_empty" << std::endl;
+	std::cout << "     contains {value}" << std::endl << "     is_max" << std::endl << "     is_min" << std::endl << "     vaild_heap" << std::endl << std::endl;
 }
 
 void IOSystem(PQueue<type>* pqueue) {
 	bool session = true;
 	std::string cmd;
 	type value;
+	int idx;
 	PrintHeader();
 	while (session) {
 		std::cout << " > ";
@@ -65,16 +67,20 @@ void IOSystem(PQueue<type>* pqueue) {
 		else if (cmd == "length") {
 			std::cout << " " << pqueue->Length() << std::endl;
 		}
+		else if (cmd == "find") {
+			std::cin >> idx;
+			std::cout << " " << pqueue->Find(idx) << std::endl;
+		}
 		else if (cmd == "is_empty") {
 			std::cout << " " << pqueue->IsEmpty() << std::endl;
 		}
 		else if (cmd == "remove_value") {
 			std::cin >> value;
-			pqueue->RemoveValue(value);
+			std::cout << " " << pqueue->RemoveValue() << std::endl;
 		}
 		else if (cmd == "contains") {
-			std::cin >> value;
-			std::cout << " " << pqueue->Contains(value) << std::endl;
+			std::cin >> idx;
+			std::cout << " " << pqueue->Contains(idx) << std::endl;
 		}
 		else if (cmd == "is_max") {
 			std::cout << " " << pqueue->IsMax() << std::endl;

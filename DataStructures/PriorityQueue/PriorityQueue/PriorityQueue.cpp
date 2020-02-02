@@ -51,6 +51,9 @@ template <class T>
 int PQueue<T>::Length() { return heap->Length(); }
 
 template <class T>
+int PQueue<T>::Find(int idx) { return heap->Find(idx); }
+
+template <class T>
 bool PQueue<T>::IsEmpty() { return Length() == 0; }
 
 template <class T>
@@ -188,7 +191,3 @@ T PQueue<T>::Remove(int idx) {
 		return r_data;
 	}
 }
-
-template class PQueue<int>;
-template class PQueue<float>;
-template class PQueue<char>;

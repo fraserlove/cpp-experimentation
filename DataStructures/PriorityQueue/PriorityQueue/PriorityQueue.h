@@ -69,6 +69,7 @@ public:
 	void ShowDebug(); // Displays the dynamic array used to represent the heap, O(n)
 
 	int Length(); // Returns the length of the priority queue, O(1)
+    int Find(int idx); // Returns the position of the first instance of a specific value in the priority queue, O(n)
 
 	bool IsEmpty(); // Checks if the priority queue is empty, O(1)
 	bool RemoveValue(T data); // Removes a specific value from the priority queue, O(n)
@@ -80,3 +81,7 @@ public:
 	T Dequeue(); // Removes and returns the lowest priority element in the priority queue, O(log(n))
 	T Peek(); // Returns the value of the element with the lowest priority in the priority queue , O(1)
 };
+
+template class PQueue<int>;
+template class PQueue<float>;
+template class PQueue<char>;

@@ -262,7 +262,3 @@ DynamicArray<int>* DynamicArray<T>::FindAll(T data) {
 	}
 	return indices;
 }
-
-template class DynamicArray<int>;
-template class DynamicArray<float>;
-template class DynamicArray<char>;
