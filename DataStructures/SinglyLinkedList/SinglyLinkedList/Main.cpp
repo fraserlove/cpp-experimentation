@@ -33,7 +33,7 @@ void PrintHeader() {
 void PrintCommands() {
     std::cout << " All Commands (Must be entered lower case):" << std::endl << std::endl;
 	std::cout << "     set {index} {value}" << std::endl << "     push {value}" << std::endl << "     insert {index} {value}" << std::endl << "     clear" << std::endl;
-    std::cout << "     reverse" << std::endl << "     show" << std::endl << "     show_as_string" << std::endl << "     show_debug" << std::endl;
+	std::cout << "     reverse" << std::endl << "     show" << std::endl << "     show_as_string" << std::endl << "     show_debug" << std::endl;
     std::cout << "     length" << std::endl << "     find {value}" << std::endl << "     is_empty" << std::endl;
     std::cout << "     remove_value {value}" << std::endl << "     contains {value}" << std::endl << "     access" << std::endl;
     std::cout << "     access {index}" << std::endl << "     pop" << std::endl << "     peek" << std::endl << "     remove {idx}" << std::endl << "     to_array" << std::endl << std::endl;

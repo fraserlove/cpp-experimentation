@@ -32,10 +32,10 @@ void PrintHeader() {
 
 void PrintCommands() {
 	std::cout << " All Commands (Must be entered lower case):" << std::endl << std::endl;
-	std::cout << "     enqueue {value}" << std::endl << "     remove_value {value}" << std::endl << "     contains {value}" << std::endl;
-	std::cout << "     dequeue" << std::endl << "     peek" << std::endl << "     clear" << std::endl;
-	std::cout << "     show_debug" << std::endl << "     length" << std::endl << "		find {index}" << std::endl << "     is_empty" << std::endl;
-	std::cout << "     contains {value}" << std::endl << "     is_max" << std::endl << "     is_min" << std::endl << "     vaild_heap" << std::endl << std::endl;
+	std::cout << "     enqueue {value}" << std::endl << "     clear" << std::endl << "     show_debug" << std::endl;
+	std::cout << "     length" << std::endl << "     find {index}" << std::endl << "     is_empty" << std::endl;
+	std::cout << "     remove_value {value}" << std::endl << "     contains {value}" << std::endl << "     is_max" << std::endl << "     is_min" << std::endl;
+	std::cout << "     valid_heap" << std::endl << "     dequeue" << std::endl << "     peek" << std::endl << std::endl;
 }
 
 void IOSystem(PQueue<type>* pqueue) {
@@ -76,11 +76,11 @@ void IOSystem(PQueue<type>* pqueue) {
 		}
 		else if (cmd == "remove_value") {
 			std::cin >> value;
-			std::cout << " " << pqueue->RemoveValue() << std::endl;
+			std::cout << " " << pqueue->RemoveValue(value) << std::endl;
 		}
 		else if (cmd == "contains") {
-			std::cin >> idx;
-			std::cout << " " << pqueue->Contains(idx) << std::endl;
+			std::cin >> value;
+			std::cout << " " << pqueue->Contains(value) << std::endl;
 		}
 		else if (cmd == "is_max") {
 			std::cout << " " << pqueue->IsMax() << std::endl;

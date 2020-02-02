@@ -19,7 +19,7 @@ template <class T>
 Stack<T>::~Stack() { list.~SinglyLinkedList(); }
 
 template <class T>
-void Stack<T>::Push(T data) { list.Add(0, data); }
+void Stack<T>::Push(T data) { list.Insert(0, data); }
 
 template <class T>
 void Stack<T>::Clear() { list.Clear(); }

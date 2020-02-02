@@ -10,7 +10,7 @@
  * a new static array. The rate of dynamic resizing for array growth and decay
  * can be controlled for either, shorter average Pop(), Push(), Insert() and
  * Remove() calls, or improved space complexity. Class allows for integer, 
- * float, character and string data types.
+ * float and character data types.
  *
  * =============================================================================
  * MIT License

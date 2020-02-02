@@ -19,7 +19,7 @@ template <class T>
 Queue<T>::~Queue() { list.~SinglyLinkedList(); }
 
 template <class T>
-void Queue<T>::Enqueue(T data) { list.Add(Length(), data); }
+void Queue<T>::Enqueue(T data) { list.Push(data); }
 
 template <class T>
 void Queue<T>::Clear() { list.Clear(); }

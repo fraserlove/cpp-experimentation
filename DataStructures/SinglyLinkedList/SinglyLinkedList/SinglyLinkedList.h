@@ -6,8 +6,8 @@
  *
  * Singly linked list implementation. Includes tail pointer for constant time
  * insertion at the end of the linked list and length variable for recieving the
- * length of the list in constant time. Class allows for integer, float, 
- * character and string data types.
+ * length of the list in constant time. Class allows for integer, float and
+ * character data types.
  *
  * =============================================================================
  * MIT License

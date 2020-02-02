@@ -8,7 +8,7 @@
  * implemented using dynamic arrays in DynamicArray class present in Fraser's
  * data structure library included in "DynamicArray.h". Minimum priority queue
  * is default, with boolean heap_type avaliable so a maximum priority queue can
- * be created. Class allows for integer, float, character and string data types.
+ * be created. Class allows for integer, float and character data types.
  *
  * =============================================================================
  * MIT License
